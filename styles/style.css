@@ -1,16 +1,30 @@
-body{
+body {
     text-align: center;
     background: #00ECB9;
-  font-family: sans-serif;
-  font-weight: 100;
+    font-family: sans-serif;
+    font-weight: 100;
 }
-h3{
-  color: #396;
-  font-weight: 100;
-  font-size: 40px;
-  margin: 40px 0px 20px;
+
+h2 {
+    color: #396;
+    font-weight: 100;
+    font-size: 40px;
 }
- #clockdiv{
+
+button {
+    color: #396;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+h3 {
+    color: #396;
+    font-weight: 100;
+    font-size: 40px;
+    margin: 40px 0px 20px;
+}
+
+#clockdiv {
     font-family: sans-serif;
     color: #fff;
     display: inline-block;
@@ -18,26 +32,35 @@ h3{
     text-align: center;
     font-size: 30px;
 }
-#clockdiv > div{
+
+#clockdiv>div {
     padding: 10px;
     border-radius: 3px;
     background: #00BF96;
     display: inline-block;
 }
-#clockdiv div > span{
+
+#clockdiv div>span {
     padding: 15px;
     border-radius: 3px;
     background: #00816A;
     display: inline-block;
 }
-smalltext{
+
+smalltext {
     padding-top: 5px;
     font-size: 16px;
 }
 
-#image{
+#image {
     height: 400px;
     width: 400px;
     display: none;
 
+}
+
+#demo {
+    color: #396;
+    font-weight: 100;
+    font-size: 20px;
 }
