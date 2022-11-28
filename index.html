@@ -14,80 +14,177 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles/style.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100;200;300&display=swap"
+        rel="stylesheet">
+        
 </head>
 
 <body>
 
-    <h2>BUG CATCHER (FIND THE DEFECT)</h2>
-
-    <div class="container d-flex align-items-center justify-content-center">
-
-        <img id="image" src="" class="rounded" alt="...">
-
-        <button type="button" onclick="show(hide); timer()" id="btnID">
-            Start Game
-        </button>
-    </div>
-
-    <h3>Countdown Clock</h3>
-
-    <div id="clockdiv">
-        <div>
-            <span class="minutes" id="minute"></span>
-            <div class="smalltext">Minutes</div>
+    <nav class="navbar heading">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo_rgb_reversed.svg" alt="Logo" width="130" height="30"
+                    class="d-inline-block align-text-top">
+            </a>
+            <span>SOFTWARE TEST LAB CLOUD FLEET MANAGMENT</span>
         </div>
-        <div>
-            <span class="seconds" id="second"></span>
-            <div class="smalltext">Seconds</div>
+    </nav>
+
+    <div class="container-fluid text-center">
+        <div class="row heading-second">
+            <div class="col">
+                <h4>BUG STATION</h4>
+            </div>
+        </div>
+        <div class="row content">
+            <div class="col-3">
+
+            </div>
+            <div class="col-6">
+                <div class="container align-items-center justify-content-center">
+
+                    <div class="row" id="description">
+                        <p>There will be one or more <b>BUGS</b> present in the coming picture. You have to tell us what
+                            is the bug within 15 seconds</p>
+                    </div>
+
+                    <div class="row justify-content-center" id="picture">
+                        <img id="image" src="" class="rounded" alt="...">
+                        <figcaption id="image-caption"></figcaption>
+                    </div>
+
+
+                    <div class="row" id="start-btn">
+                        <button class="btn btn-success" type="button" onclick=" startTimer()" id="btnID">
+                            Start Game
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="container" id="clock">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-12">
+                            <div id="countdown">
+                                <div id="countdown-number">15</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-4">
+                            <button class="clock-btn btn btn-success" id="stop">
+                                <img src="https://img.icons8.com/ios-glyphs/30/000000/pause--v1.png" />
+                            </button>
+                        </div>
+                        <div class="col-4">
+                            <button class="clock-btn btn btn-success" id="start">
+                                <img src="https://img.icons8.com/ios-glyphs/30/000000/play--v1.png" />
+                            </button>
+                        </div>
+                        <div class="col-4">
+                            <button class="clock-btn btn btn-success" id="reset">
+                                <img src="https://img.icons8.com/ios-glyphs/30/000000/stop.png" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <p id="demo"></p>
-
     <script>
 
-        function show(callback) {
-            console.log("show called");
-            document.getElementById("demo").innerHTML = "";
+        // Select Countdown container
+        const countContainer = document.getElementById("countdown-number");
+
+        // Select action buttons
+        const startButton = document.getElementById("start");
+        const stopButton = document.getElementById("stop");
+        const resetButton = document.getElementById("reset");
+
+
+        // variable to store count
+        var remainingTime = 15;
+
+        // variable to store time interval
+        var timer;
+
+        // Variable to track whether timer is running or not
+        var isStopped = true;
+
+        // Function to start Timer
+        const startTimer = () => {
+            if (isStopped) {
+                isStopped = false;
+                countContainer.innerHTML = remainingTime;
+                timer = setInterval(renderTime, 1000);
+            }
             let image = document.getElementById("image");
-            let imgNo = Math.floor(Math.random() * 6 + 1);
+            let imgNo = Math.floor(Math.random() * 40 + 1);
             image.src = "images/" + imgNo + ".jpg";
             image.style.display = "block";
+            image.style.height = "400px";
+            image.style.width = "400px";
+            document.getElementById("image-caption").innerHTML = "Hurry up! Time is running out.";
             document.getElementById("btnID").style.display = "none";
-            callback();
-        }
+            document.getElementById("description").style.display = "none";
+        };
 
-        function hide() {
-            setTimeout(function () {
-                console.log("hide called");
+        // Function to stop Timer
+        const stopTimer = () => {
+            isStopped = true;
+            if (timer) {
+                clearInterval(timer);
+            }
+        };
+
+        // Function to reset Timer
+        const resetTimer = () => {
+            isStopped = true;
+            clearInterval(timer);
+            remainingTime = 15;
+            countContainer.innerHTML = remainingTime;
+            let image = document.getElementById("image");
+            image.style.height = "300px";
+            image.style.width = "300px";
+            image.src = "images/bugDown.gif";
+            document.getElementById("image-caption").innerHTML = "Chocolate is yours!";
+            document.getElementById("btnID").style.display = "block";
+            document.getElementById("description").style.display = "block";
+        };
+
+        // Attach onclick event to buttons
+        startButton.onclick = startTimer;
+        resetButton.onclick = resetTimer;
+        stopButton.onclick = stopTimer;
+
+        // function to display time
+        const renderTime = () => {
+            // decement time
+            remainingTime -= 1;
+            // render count on the screen
+            countContainer.innerHTML = remainingTime;
+            // timeout on zero
+            if (remainingTime === 0) {
+                isStopped = true;
+                clearInterval(timer);
+                remainingTime = 15;
                 let image = document.getElementById("image");
-                image.src = "";
-                image.style.display = "none";
+                image.style.height = "300px";
+                image.style.width = "300px";
+                image.src = "images/bugWin.gif";
+                document.getElementById("image-caption").innerHTML = "Better luck next time";
                 document.getElementById("btnID").style.display = "block";
-            }, 9000);
-        }
-
-        function timer() {
-            var timeleft = 8;
-            var gameTimer = setInterval(function () {
-                if (timeleft <= 0) {
-                    clearInterval(gameTimer);
-                    document.getElementById("minute").innerHTML = '0';
-                    document.getElementById("second").innerHTML = '0';
-                    document.getElementById("demo").innerHTML = "TIME UP";
-                } else {
-                    var minutes = Math.floor(timeleft / 60);
-                    var seconds = Math.floor(timeleft % 60);
-                    document.getElementById("minute").innerHTML = minutes;
-                    document.getElementById("second").innerHTML = seconds;
-                }
-                timeleft -= 1;
-            }, 1000);
-        }
+                document.getElementById("description").style.display = "block";
+            }
+        };
 
 
     </script>
+
 </body>
 
 </html>
