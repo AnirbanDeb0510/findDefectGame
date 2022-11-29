@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100;200;300&display=swap"
         rel="stylesheet">
-        
+
 </head>
 
 <body>
@@ -58,7 +58,7 @@
 
 
                     <div class="row" id="start-btn">
-                        <button class="btn btn-success" type="button" onclick=" startTimer()" id="btnID">
+                        <button class="btn btn-success" type="button" id="btnID">
                             Start Game
                         </button>
                     </div>
@@ -68,11 +68,13 @@
             <div class="col-3">
                 <div class="container" id="clock">
                     <div class="row align-items-center justify-content-center">
-                        <div class="col-12">
+                        <div class="col-4"></div>
+                        <div class="col-4">
                             <div id="countdown">
                                 <div id="countdown-number">15</div>
                             </div>
                         </div>
+                        <div class="col-4"></div>
                     </div>
                     <div class="row align-items-center justify-content-center">
                         <div class="col-4">
@@ -104,6 +106,7 @@
         const startButton = document.getElementById("start");
         const stopButton = document.getElementById("stop");
         const resetButton = document.getElementById("reset");
+        const gameButton = document.getElementById("btnID");
 
 
         // variable to store count
@@ -122,16 +125,27 @@
                 countContainer.innerHTML = remainingTime;
                 timer = setInterval(renderTime, 1000);
             }
-            let image = document.getElementById("image");
-            let imgNo = Math.floor(Math.random() * 40 + 1);
-            image.src = "images/" + imgNo + ".jpg";
-            image.style.display = "block";
-            image.style.height = "400px";
-            image.style.width = "400px";
-            document.getElementById("image-caption").innerHTML = "Hurry up! Time is running out.";
-            document.getElementById("btnID").style.display = "none";
-            document.getElementById("description").style.display = "none";
+            if (remainingTime === 15) {
+                let image = document.getElementById("image");
+                let imgNo = Math.floor(Math.random() * 40 + 1);
+                image.src = "images/" + imgNo + ".jpg";
+                image.style.display = "block";
+                let size = window.innerHeight * 0.75;
+                image.style.height = "" + size + "px";
+                image.style.width = "" + size + "px";
+                document.getElementById("image-caption").innerHTML = "Hurry up! Time is running out.";
+                document.getElementById("btnID").style.display = "none";
+                document.getElementById("description").style.display = "none";
+            }
         };
+
+        //Function to resume Timer
+        const resumeTimer = () => {
+            if (isStopped && remainingTime!=15) {
+                countContainer.innerHTML = remainingTime;
+                timer = setInterval(renderTime, 1000);
+            }
+        }
 
         // Function to stop Timer
         const stopTimer = () => {
@@ -148,8 +162,9 @@
             remainingTime = 15;
             countContainer.innerHTML = remainingTime;
             let image = document.getElementById("image");
-            image.style.height = "300px";
-            image.style.width = "300px";
+            let size = window.innerHeight * 0.6;
+            image.style.height = "" + size + "px";
+            image.style.width = "" + size + "px";
             image.src = "images/bugDown.gif";
             document.getElementById("image-caption").innerHTML = "Chocolate is yours!";
             document.getElementById("btnID").style.display = "block";
@@ -157,7 +172,8 @@
         };
 
         // Attach onclick event to buttons
-        startButton.onclick = startTimer;
+        gameButton.onclick = startTimer;
+        startButton.onclick = resumeTimer;
         resetButton.onclick = resetTimer;
         stopButton.onclick = stopTimer;
 
@@ -173,8 +189,9 @@
                 clearInterval(timer);
                 remainingTime = 15;
                 let image = document.getElementById("image");
-                image.style.height = "300px";
-                image.style.width = "300px";
+                let size = window.innerHeight * 0.6;
+                image.style.height = "" + size + "px";
+                image.style.width = "" + size + "px";
                 image.src = "images/bugWin.gif";
                 document.getElementById("image-caption").innerHTML = "Better luck next time";
                 document.getElementById("btnID").style.display = "block";
