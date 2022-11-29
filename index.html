@@ -130,7 +130,7 @@
                 let imgNo = Math.floor(Math.random() * 40 + 1);
                 image.src = "images/" + imgNo + ".jpg";
                 image.style.display = "block";
-                let size = window.innerHeight * 0.75;
+                let size = window.innerHeight * 0.7;
                 image.style.height = "" + size + "px";
                 image.style.width = "" + size + "px";
                 document.getElementById("image-caption").innerHTML = "Hurry up! Time is running out.";
@@ -162,9 +162,8 @@
             remainingTime = 15;
             countContainer.innerHTML = remainingTime;
             let image = document.getElementById("image");
-            let size = window.innerHeight * 0.6;
-            image.style.height = "" + size + "px";
-            image.style.width = "" + size + "px";
+            image.style.height = "50%";
+            image.style.width = "50%";
             image.src = "images/bugDown.gif";
             document.getElementById("image-caption").innerHTML = "Chocolate is yours!";
             document.getElementById("btnID").style.display = "block";
@@ -189,9 +188,8 @@
                 clearInterval(timer);
                 remainingTime = 15;
                 let image = document.getElementById("image");
-                let size = window.innerHeight * 0.6;
-                image.style.height = "" + size + "px";
-                image.style.width = "" + size + "px";
+                image.style.height = "50%";
+                image.style.width = "50%";
                 image.src = "images/bugWin.gif";
                 document.getElementById("image-caption").innerHTML = "Better luck next time";
                 document.getElementById("btnID").style.display = "block";
