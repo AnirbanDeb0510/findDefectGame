@@ -48,7 +48,7 @@
 
                     <div class="row" id="description">
                         <p>There will be one or more <b>BUGS</b> present in the coming picture. You have to tell us what
-                            is the bug within 15 seconds</p>
+                            is the bug within 18 seconds</p>
                     </div>
 
                     <div class="row justify-content-center" id="picture">
@@ -71,7 +71,7 @@
                         <div class="col-4"></div>
                         <div class="col-4">
                             <div id="countdown">
-                                <div id="countdown-number">15</div>
+                                <div id="countdown-number">18</div>
                             </div>
                         </div>
                         <div class="col-4"></div>
@@ -110,7 +110,7 @@
 
 
         // variable to store count
-        var remainingTime = 15;
+        var remainingTime = 18;
 
         // variable to store time interval
         var timer;
@@ -125,7 +125,7 @@
                 countContainer.innerHTML = remainingTime;
                 timer = setInterval(renderTime, 1000);
             }
-            if (remainingTime === 15) {
+            if (remainingTime === 18) {
                 let image = document.getElementById("image");
                 let imgNo = Math.floor(Math.random() * 39 + 1);
                 image.src = "images/" + imgNo + ".jpg";
@@ -141,7 +141,7 @@
 
         //Function to resume Timer
         const resumeTimer = () => {
-            if (isStopped && remainingTime!=15) {
+            if (isStopped && remainingTime!=18) {
                 countContainer.innerHTML = remainingTime;
                 timer = setInterval(renderTime, 1000);
             }
@@ -159,7 +159,7 @@
         const resetTimer = () => {
             isStopped = true;
             clearInterval(timer);
-            remainingTime = 15;
+            remainingTime = 18;
             countContainer.innerHTML = remainingTime;
             let image = document.getElementById("image");
             image.style.height = "50%";
@@ -186,7 +186,7 @@
             if (remainingTime === 0) {
                 isStopped = true;
                 clearInterval(timer);
-                remainingTime = 15;
+                remainingTime = 18;
                 let image = document.getElementById("image");
                 image.style.height = "50%";
                 image.style.width = "50%";
